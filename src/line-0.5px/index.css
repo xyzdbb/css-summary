@@ -1,0 +1,88 @@
+/*  
+实现原理：
+伪类 + transform
+
+为需要加边框线的元素插入伪类，伪类采用绝对定位，然后对伪类添加1px边框，最后进行0.5倍缩放。transform的缩放和旋转默认都是按照元素的中心点，
+为了使之依然左上角,我们需要改变元素变形的中心点
+
+参考文档：
+总结一下各种0.5px的线 https://segmentfault.com/a/1190000015385024
+ */
+ .example {
+  position: relative;
+  font-size: 16px;
+  width: 200px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  margin: 0 auto 100px auto;
+}
+
+.border::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  border: solid 1px red;
+}
+
+.top::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1px;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+  /* background-color: red; */
+  border-top: 1px solid red;
+}
+
+.right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  width: 1px;
+  height: 100%;
+  transform: scaleX(0.5);
+  transform-origin: 0 0;
+  /* background-color: red; */
+  border-right: 1px solid red;
+}
+
+.bottom::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1px;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+  /* background-color: red; */
+  border-bottom: 1px solid red;
+}
+
+.left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 1px;
+  height: 100%;
+  transform: scaleX(0.5);
+  transform-origin: 0 0;
+  /* background-color: red; */
+  border-left: 1px solid red;
+}
